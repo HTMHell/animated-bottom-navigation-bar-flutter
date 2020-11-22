@@ -111,6 +111,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
         icons: iconList,
+        labels: ['Home', 'Test', 'Foo', 'Bar'],
         backgroundColor: HexColor('#373A36'),
         activeIndex: _bottomNavIndex,
         activeColor: HexColor('#FFA400'),
@@ -122,6 +123,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         gapLocation: GapLocation.center,
         leftCornerRadius: 32,
         rightCornerRadius: 32,
+        showUnselectedLabels: true,
         onTap: (index) => setState(() => _bottomNavIndex = index),
       ),
     );

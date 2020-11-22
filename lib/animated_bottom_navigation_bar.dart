@@ -203,11 +203,14 @@ class _AnimatedBottomNavigationBarState extends State<AnimatedBottomNavigationBa
         color: widget.backgroundColor,
         child: SafeArea(
           child: Container(
-            height: widget.height,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: _buildItems(),
+            height: widget.height + (widget.labels != null ? widget.labelSize : 0),
+            child: Padding(
+              padding: EdgeInsets.only(top: widget.labels != null ? widget.labelSize : 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: _buildItems(),
+              ),
             ),
           ),
         ),
