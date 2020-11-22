@@ -48,22 +48,27 @@ class NavigationBarItem extends StatelessWidget {
             child: Transform.scale(
               scale: isActive ? iconScale : 1,
               child: label != null && showLabel
-                  ? Column(
-                      children: [
-                        Icon(
-                          iconData,
-                          color: isActive ? activeColor : inactiveColor,
-                          size: iconSize,
-                        ),
-                        Text(
-                          label,
-                          style: TextStyle(
+                  ? Padding(
+                    padding: EdgeInsets.only(top: labelSize),
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            iconData,
                             color: isActive ? activeColor : inactiveColor,
-                            fontSize: labelSize,
+                            size: iconSize,
                           ),
-                        ),
-                      ],
-                    )
+                          Text(
+                            label,
+                            style: TextStyle(
+                              color: isActive ? activeColor : inactiveColor,
+                              fontSize: labelSize,
+                            ),
+                          ),
+                        ],
+                      ),
+                  )
                   : Icon(
                       iconData,
                       color: isActive ? activeColor : inactiveColor,
