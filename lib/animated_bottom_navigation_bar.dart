@@ -12,6 +12,9 @@ class AnimatedBottomNavigationBar extends StatefulWidget {
   /// Icon data to render in the tab bar.
   final List<IconData> icons;
 
+  /// Label data to render in the tab bar.
+  final List<String> labels;
+
   /// Handler which is passed every updated active index.
   final Function(int) onTap;
 
@@ -20,6 +23,9 @@ class AnimatedBottomNavigationBar extends StatefulWidget {
 
   /// Optional custom size for each tab bar icon.
   final double iconSize;
+
+  /// Optional custom size for each tab bar label.
+  final double labelSize;
 
   /// Optional custom tab bar height.
   final double height;
@@ -72,6 +78,7 @@ class AnimatedBottomNavigationBar extends StatefulWidget {
     @required this.icons,
     @required this.activeIndex,
     @required this.onTap,
+    this.labels,
     this.height = 56,
     this.elevation = 8,
     this.splashRadius = 24,
@@ -85,6 +92,7 @@ class AnimatedBottomNavigationBar extends StatefulWidget {
     this.leftCornerRadius = 0,
     this.rightCornerRadius = 0,
     this.iconSize = 24,
+    this.labelSize = 24,
     this.notchSmoothness = NotchSmoothness.softEdge,
     this.gapLocation = GapLocation.none,
     this.gapWidth = 72,
@@ -223,8 +231,10 @@ class _AnimatedBottomNavigationBarState
           activeColor: widget.activeColor,
           inactiveColor: widget.inactiveColor,
           iconData: widget.icons[i],
+          label: widget.labels[i],
           iconScale: _iconScale,
           iconSize: widget.iconSize,
+          labelSize: widget.labelSize,
           onTap: () => widget.onTap(widget.icons.indexOf(widget.icons[i])),
         ),
       );
