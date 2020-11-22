@@ -235,7 +235,7 @@ class _AnimatedBottomNavigationBarState extends State<AnimatedBottomNavigationBa
           activeColor: widget.activeColor,
           inactiveColor: widget.inactiveColor,
           iconData: widget.icons[i],
-          label: widget.labels[i],
+          label: widget.labels != null && widget.labels[i] != null ? widget.labels[i] : null,
           iconScale: _iconScale,
           iconSize: widget.iconSize,
           labelSize: widget.labelSize,
