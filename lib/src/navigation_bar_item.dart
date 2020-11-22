@@ -13,6 +13,7 @@ class NavigationBarItem extends StatelessWidget {
   final double iconScale;
   final double iconSize;
   final double labelSize;
+  final bool showLabel;
   final VoidCallback onTap;
 
   NavigationBarItem({
@@ -27,6 +28,7 @@ class NavigationBarItem extends StatelessWidget {
     this.iconScale,
     this.iconSize,
     this.labelSize,
+    this.showLabel,
     this.onTap,
   }) : super();
 
@@ -45,20 +47,20 @@ class NavigationBarItem extends StatelessWidget {
           child: InkWell(
             child: Transform.scale(
               scale: isActive ? iconScale : 1,
-              child: label != null
+              child: label != null && showLabel
                   ? Column(
                       children: [
+                        Icon(
+                          iconData,
+                          color: isActive ? activeColor : inactiveColor,
+                          size: iconSize,
+                        ),
                         Text(
                           label,
                           style: TextStyle(
                             color: isActive ? activeColor : inactiveColor,
                             fontSize: labelSize,
                           ),
-                        ),
-                        Icon(
-                          iconData,
-                          color: isActive ? activeColor : inactiveColor,
-                          size: iconSize,
                         ),
                       ],
                     )

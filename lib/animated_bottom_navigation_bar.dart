@@ -73,6 +73,12 @@ class AnimatedBottomNavigationBar extends StatefulWidget {
   /// Free space width between tab bar items. The preferred width is equal to total width of [FloatingActionButton] and double [notchMargin].
   final double gapWidth;
 
+  /// Whether the labels are shown for the selected tab bars
+  final bool showSelectedLabels;
+
+  /// Whether the labels are shown for the unselected tab bars
+  final bool showUnselectedLabels;
+
   AnimatedBottomNavigationBar({
     Key key,
     @required this.icons,
@@ -92,10 +98,12 @@ class AnimatedBottomNavigationBar extends StatefulWidget {
     this.leftCornerRadius = 0,
     this.rightCornerRadius = 0,
     this.iconSize = 24,
-    this.labelSize = 24,
+    this.labelSize = 14,
     this.notchSmoothness = NotchSmoothness.softEdge,
     this.gapLocation = GapLocation.none,
     this.gapWidth = 72,
+    this.showSelectedLabels = true,
+    this.showUnselectedLabels = false,
   })  : assert(icons != null),
         assert(icons.length >= 2 && icons.length <= 5),
         assert(activeIndex != null),
@@ -109,19 +117,16 @@ class AnimatedBottomNavigationBar extends StatefulWidget {
     }
     if (gapLocation == GapLocation.center) {
       if (icons.length % 2 != 0)
-        throw NonAppropriatePathException(
-            'Odd count of icons along with $gapLocation causes render issue => '
+        throw NonAppropriatePathException('Odd count of icons along with $gapLocation causes render issue => '
             'consider set gapLocation to ${GapLocation.end}');
     }
   }
 
   @override
-  _AnimatedBottomNavigationBarState createState() =>
-      _AnimatedBottomNavigationBarState();
+  _AnimatedBottomNavigationBarState createState() => _AnimatedBottomNavigationBarState();
 }
 
-class _AnimatedBottomNavigationBarState
-    extends State<AnimatedBottomNavigationBar> with TickerProviderStateMixin {
+class _AnimatedBottomNavigationBarState extends State<AnimatedBottomNavigationBar> with TickerProviderStateMixin {
   ValueListenable<ScaffoldGeometry> geometryListenable;
   AnimationController _bubbleController;
   double _bubbleRadius = 0;
@@ -213,8 +218,7 @@ class _AnimatedBottomNavigationBarState
   List<Widget> _buildItems() {
     List items = <Widget>[];
     for (var i = 0; i < widget.icons.length; i++) {
-      if (widget.gapLocation == GapLocation.center &&
-          i == widget.icons.length / 2) {
+      if (widget.gapLocation == GapLocation.center && i == widget.icons.length / 2) {
         items.add(
           GapItem(
             width: widget.gapWidth * widget.notchAndCornersAnimation.value,
@@ -235,12 +239,13 @@ class _AnimatedBottomNavigationBarState
           iconScale: _iconScale,
           iconSize: widget.iconSize,
           labelSize: widget.labelSize,
+          showLabel: (i == widget.activeIndex && widget.showSelectedLabels) ||
+              (i != widget.activeIndex && widget.showUnselectedLabels),
           onTap: () => widget.onTap(widget.icons.indexOf(widget.icons[i])),
         ),
       );
 
-      if (widget.gapLocation == GapLocation.end &&
-          i == widget.icons.length - 1) {
+      if (widget.gapLocation == GapLocation.end && i == widget.icons.length - 1) {
         items.add(
           GapItem(
             width: widget.gapWidth * widget.notchAndCornersAnimation.value,
