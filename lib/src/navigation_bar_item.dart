@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/src/bubble_selection_painter.dart';
 
 class NavigationBarItem extends StatelessWidget {
+  final GlobalKey key;
   final bool isActive;
   final double bubbleRadius;
   final double maxBubbleRadius;
@@ -17,6 +18,7 @@ class NavigationBarItem extends StatelessWidget {
   final VoidCallback onTap;
 
   NavigationBarItem({
+    this.key,
     this.isActive,
     this.bubbleRadius,
     this.maxBubbleRadius,
@@ -36,6 +38,7 @@ class NavigationBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
+        key: key,
         height: double.infinity,
         width: double.infinity,
         child: CustomPaint(
