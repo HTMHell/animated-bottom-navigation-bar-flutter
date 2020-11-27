@@ -80,7 +80,7 @@ class AnimatedBottomNavigationBar extends StatefulWidget {
   final bool showUnselectedLabels;
 
   /// List of tab bar items keys
-  final List<GlobalKey> tabItemsKeys;
+  final List<GlobalKey> keys;
 
   AnimatedBottomNavigationBar({
     Key key,
@@ -107,7 +107,7 @@ class AnimatedBottomNavigationBar extends StatefulWidget {
     this.gapWidth = 72,
     this.showSelectedLabels = true,
     this.showUnselectedLabels = false,
-    this.tabItemsKeys = const [],
+    this.keys = const [],
   })  : assert(icons != null),
         assert(icons.length >= 2 && icons.length <= 5),
         assert(activeIndex != null),
@@ -232,7 +232,7 @@ class _AnimatedBottomNavigationBarState extends State<AnimatedBottomNavigationBa
 
       items.add(
         NavigationBarItem(
-          key: widget.tabItemsKeys[i],
+          key: widget.keys.length > i ? widget.keys[i] : null,
           isActive: i == widget.activeIndex,
           bubbleRadius: _bubbleRadius,
           maxBubbleRadius: widget.splashRadius,
