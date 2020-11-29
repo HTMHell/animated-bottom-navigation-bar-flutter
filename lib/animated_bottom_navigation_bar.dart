@@ -232,7 +232,7 @@ class _AnimatedBottomNavigationBarState extends State<AnimatedBottomNavigationBa
 
       items.add(
         NavigationBarItem(
-          key: widget.keys.length > i ? widget.keys[i] : null,
+          keyRef: widget.keys.length > i ? widget.keys[i] : null,
           isActive: i == widget.activeIndex,
           bubbleRadius: _bubbleRadius,
           maxBubbleRadius: widget.splashRadius,
