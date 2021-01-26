@@ -62,11 +62,14 @@ class NavigationBarItem extends StatelessWidget {
                             color: isActive ? activeColor : inactiveColor,
                             size: iconSize,
                           ),
-                          Text(
-                            label,
-                            style: TextStyle(
-                              color: isActive ? activeColor : inactiveColor,
-                              fontSize: labelSize,
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              label,
+                              style: TextStyle(
+                                color: isActive ? activeColor : inactiveColor,
+                                fontSize: labelSize,
+                              ),
                             ),
                           ),
                         ],
